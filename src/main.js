@@ -4,7 +4,7 @@ import http from '@/http'
 import router from '@/router'
 import store from '@/store'
 import '@/mock'
-
+import '@/common/stylus/icon.styl'
 Vue.config.productionTip = false
 Vue.prototype.$http = http
 

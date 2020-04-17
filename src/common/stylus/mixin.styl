@@ -1,0 +1,31 @@
+//1px边框混合定义
+one-px($color)
+  position relative
+  &:after
+    position absolute
+    left 0
+    bottom 0
+    display block
+    content ""
+    width 100%
+    height 1px
+    background-color $color
+    @media only screen and (-webkit-device-pixel-ratio:2)
+      transform scaleY(.5)
+        
+    @media only screen and (-webkit-device-pixel-ratio:3)
+      transform scaleY(0.333)
+
+//背景图片混合定义
+bg-image($imgName)
+  @media only screen and (-webkit-device-pixel-ratio:2)
+    background-image url("./img/"+$imgName+"@2x.png")
+        
+  @media only screen and (-webkit-device-pixel-ratio:3)
+    background-image url("./img/"+$imgName+"@3x.png")
+
+//元素垂直水平居中混合
+center()
+  display flex
+  justify-content center
+  align-items center
