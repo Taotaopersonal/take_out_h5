@@ -1,4 +1,4 @@
-import seller from '@/http/seller'
+import shop from '@/http/shop'
 export default {
-  seller
+  shop
 }

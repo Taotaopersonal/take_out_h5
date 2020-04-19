@@ -18,17 +18,26 @@
 
 <script>
 import Header from "components/ele-header/ele-header.vue";
+import {GET_SELLER} from 'store/mutations_type'
+import {mapActions} from 'vuex'
 export default {
   name: "App",
   components: {
     "ele-header": Header
-  }
+  },
+  methods: {
+    ...mapActions([GET_SELLER])
+  },
+  mounted() {
+    this[GET_SELLER]()
+  },
 };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  @import "./common/stylus/mixin.styl";
+@import "./common/stylus/mixin.styl";
   #app
+    position relative
     width 100%
     height 100%
     overflow hidden

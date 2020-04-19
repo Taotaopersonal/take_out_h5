@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="<%= BASE_URL %>css/reset.css">
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
-
 <body>
   <noscript>
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
@@ -19,5 +18,14 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>
+<!-- 解决移动端点透问题 -->
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+<script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function () {
+      FastClick.attach(document.body);
+    }, false);
+  }
+</script>
 
 </html>

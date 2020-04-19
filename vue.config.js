@@ -17,6 +17,9 @@ module.exports = {
       alias: {
         'pages': resolve('src/pages'),
         'components': resolve('src/components'),
+        'store': resolve('src/store'),
+        'http': resolve('src/http'),
+        'common': resolve('src/common'),
       }
     },
   }

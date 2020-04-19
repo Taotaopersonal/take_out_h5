@@ -1,34 +1,17 @@
 <template>
-  <ul class="list">
-    <li class="item">
-      <ele-icon class="icon" :icon-size="1" icon-type="decrease"></ele-icon>
-      <span class="text">在线支付满28减5,满50减10</span>
-    </li>
-    <li class="item">
-      <ele-icon class="icon" :icon-size="1" icon-type="discount"></ele-icon>
-      <span class="text">在线支付满28减5,满50减10</span>
-    </li>
-    <li class="item">
-      <ele-icon class="icon" :icon-size="1" icon-type="discount"></ele-icon>
-      <span class="text">在线支付满28减5,满50减10</span>
-    </li>
-    <li class="item">
-      <ele-icon class="icon" :icon-size="1" icon-type="invoice"></ele-icon>
-      <span class="text">在线支付满28减5,满50减10</span>
-    </li>
-    <li class="item">
-      <ele-icon class="icon" :icon-size="1" icon-type="invoice"></ele-icon>
-      <span class="text">在线支付满28减5,满50减10</span>
+  <ul class="list" v-if="supports">
+    <li class="item" v-for="(item,index) in supports" :key="index">
+      <ele-icon class="icon" :icon-size="2" :type="item.type"></ele-icon>
+      <span class="text">{{item.content}}</span>
     </li>
   </ul>
 </template>
 
 <script>
-import Icon from '../ele-icon/ele-icon.vue'
 export default {
   name:"List",
-  components:{
-    "ele-icon":Icon
+  props:{
+    supports:Array,
   }
 }
 </script>

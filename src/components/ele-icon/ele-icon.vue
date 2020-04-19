@@ -1,5 +1,5 @@
 <template>
-  <i class="icon" :class="[`icon-${iconSize}`,iconType]"></i>
+  <i class="icon" :class="[`icon-${iconSize}`,iconType[type]]"></i>
 </template>
 
 <script>
@@ -7,8 +7,13 @@ export default {
   name:"Icon",
   props:{
     iconSize:Number,
-    iconType:String
-  }
+    type:Number
+  },
+  data() {
+    return {
+      iconType:["decrease","discount","guarantee","invoice","special"]
+    }
+  },
 }
 </script>
 
