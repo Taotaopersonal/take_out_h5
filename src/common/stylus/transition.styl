@@ -1,5 +1,23 @@
-// 透明度过渡
+// 遮罩层透明度过渡
 .mask-enter-active, .mask-leave-active 
   transition opacity .5s
 .mask-enter, .mask-leave-to
   opacity 0
+
+//removeBtn 过渡样式
+.contorlRemove-enter-active, .contorlRemove-leave-active 
+  transition all .3s !important;
+.contorlRemove-enter, .contorlRemove-leave-to
+  opacity 0 !important;
+  transform translate3d(48px,0,0) rotate(0deg)!important;
+
+//removeSpan 过渡样式
+.contorlSpan-enter-active, .contorlSpan-leave-active 
+  transition all .3s !important;
+.contorlSpan-enter, .contorlSpan-leave-to
+  opacity 0 !important;
+  transform translate3d(24px,0,0) rotate(0deg)!important;
+ 
+
+
+      

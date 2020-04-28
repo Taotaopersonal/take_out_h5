@@ -2,7 +2,7 @@
   <ul class="list" v-if="supports">
     <li class="item" v-for="(item,index) in supports" :key="index">
       <ele-icon class="icon" :icon-size="2" :type="item.type"></ele-icon>
-      <span class="text">{{item.content}}</span>
+      <span class="text" :style="{color}">{{item.content}}</span>
     </li>
   </ul>
 </template>
@@ -12,6 +12,7 @@ export default {
   name:"List",
   props:{
     supports:Array,
+    color:String
   }
 }
 </script>

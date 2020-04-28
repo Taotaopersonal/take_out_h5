@@ -1,3 +1,6 @@
 export const GET_SELLER = 'getSeller'
 export const GET_GOODS = 'getGoods'
 export const GET_RATINGS = 'getRatings'
+export const GET_ADDRESS = 'getAddress'
+export const GET_CATEGORIES = 'getCategories'
+export const GET_SHOPS = 'getShops'

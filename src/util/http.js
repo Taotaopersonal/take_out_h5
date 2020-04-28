@@ -1,4 +1,8 @@
-import { loading, success, fail } from './toast'
+import {
+  loading,
+  success,
+  fail
+} from './toast'
 // http工具文件，该文件负责接受axios实例，和相关模块config信息，加工处理返回相应的请求方法组成的对象
 export default (axiosIns, config = {}) => {
   //根据config中的api生成不同的请求方法返回，不同模块的请求配置api是不同的，所以返回的请求方法也不同
@@ -14,14 +18,26 @@ export default (axiosIns, config = {}) => {
   let api = config.api
   for (let apiName in api) {
 
-    let { url, method, isForm, data: apiData, $toast,hooks } = api[apiName]
-    
+    let {
+      url,
+      method,
+      isForm,
+      data: apiData,
+      $toast,
+      hooks,
+      corsUrl
+    } = api[apiName]
+
     httpObj[apiName] = async (data = {}) => {
 
       apiData = apiData || {}
       hooks = hooks || {}
-      let {beforeReq,afterReqSuccess,afterReqFail} = hooks;
-      
+      let {
+        beforeReq,
+        afterReqSuccess,
+        afterReqFail
+      } = hooks;
+
       let transformData;
 
       if (isForm) {
@@ -34,15 +50,21 @@ export default (axiosIns, config = {}) => {
         }
       } else {
         // 合并对象的方法
-        transformData = Object.assign(apiData,data)
+        transformData = Object.assign(apiData, data)
       }
 
       //根据api的methods配置去发请求
       let result;
 
+      //判断请求是否存在跨域请求,如果存在拼接对应交给devServer处理的跨域标识字段
+      if (corsUrl){
+        url = corsUrl + url
+        corsUrl = ''
+      }
+      
       try {
         $toast && loading()
-        beforeReq&&Object.prototype.toString.call(beforeReq) === '[object Function]' && beforeReq.call(config)
+        beforeReq && Object.prototype.toString.call(beforeReq) === '[object Function]' && beforeReq.call(config)
         switch (method) {
           case "get":
           case "delete":
@@ -62,11 +84,11 @@ export default (axiosIns, config = {}) => {
             break;
         }
         $toast && success()
-        afterReqSuccess&&Object.prototype.toString.call(afterReqSuccess) === '[object Function]' && afterReqSuccess.call(config)
+        afterReqSuccess && Object.prototype.toString.call(afterReqSuccess) === '[object Function]' && afterReqSuccess.call(config)
 
       } catch (error) {
         $toast && fail(error.message)
-        afterReqFail&&Object.prototype.toString.call(afterReqFail) === '[object Function]' && afterReqFail.call(config)
+        afterReqFail && Object.prototype.toString.call(afterReqFail) === '[object Function]' && afterReqFail.call(config)
       }
 
       return result;
