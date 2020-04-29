@@ -4,7 +4,8 @@ import {
   GET_RATINGS,
   GET_ADDRESS,
   GET_CATEGORIES,
-  GET_SHOPS
+  GET_SHOPS,
+  GET_LOGIN_INFO
 } from 'store/mutations_type'
 export default {
   [GET_SELLER](state, seller) {
@@ -24,5 +25,8 @@ export default {
   },
   [GET_SHOPS](state, shops) {
     state.shops = shops
+  },
+  [GET_LOGIN_INFO](state, data) {
+    state.loginData = data
   }
 }

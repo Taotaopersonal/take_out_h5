@@ -12,7 +12,7 @@
 export default {
   name: "HeaderTop",
   props: {
-    address:String
+    address: String
   }
 };
 </script>

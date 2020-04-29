@@ -6,17 +6,33 @@ export default {
     getAddress: {
       url: "/position/40.10038,116.36867",
       method: "get",
-      corsUrl: "/4000"
+      corsUrl: "/4000",
     },
     getCategories: {
       url: "/index_category",
       method: "get",
-      corsUrl: "/4000"
+      corsUrl: "/4000",
     },
     getShops: {
       url: "/shops?latitude=40.10038&longitude=116.36867",
       method: "get",
-      corsUrl: "/4000"
+      corsUrl: "/4000",
+    },
+    getCode: {
+      url: "/sendcode",
+      method: "get",
+      corsUrl: "/4000",
+      $toast:true
+    },
+    getLoginInfoBySms: {
+      url: "/login_sms",
+      method: "post",
+      corsUrl: "/4000",
+    },
+    getLoginInfoByPwd: {
+      url: "/login_pwd",
+      method: "post",
+      corsUrl: "/4000",
     }
   }
 }

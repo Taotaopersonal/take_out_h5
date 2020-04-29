@@ -7,8 +7,8 @@
           <i class="iconfont icon-sousuo"></i>
         </a>
       </template>
-      <template #right>
-        <a class="header_login">
+      <template #right v-if="!loginData._id">
+        <a class="header_login" @click="$router.push('/login')">
           <span class="header_login_text">登录|注册</span>
         </a>
       </template>
@@ -43,7 +43,12 @@
       </div>
       <div class="shop_container" ref="shopContainer">
         <ul class="shop_list">
-          <li class="shop_li border-1px" v-for="(shop, index) in shops" :key="index" @click="$router.replace(`/merchant/${shop.id}`)">
+          <li
+            class="shop_li border-1px"
+            v-for="(shop, index) in shops"
+            :key="index"
+            @click="$router.replace(`/merchant/${shop.id}`)"
+          >
             <a>
               <div class="shop_left">
                 <img class="shop_img" :src="imgBaseUrl+shop.image_path" />
@@ -66,7 +71,10 @@
                     <div class="order_section">月售{{shop.recent_order_num}}单</div>
                   </section>
                   <section class="shop_rating_order_right">
-                    <span class="delivery_style delivery_left" v-if="shop.delivery_mode">{{shop.delivery_mode.text}}</span>
+                    <span
+                      class="delivery_style delivery_left"
+                      v-if="shop.delivery_mode"
+                    >{{shop.delivery_mode.text}}</span>
                     <span class="delivery_style delivery_right">准时达</span>
                   </section>
                 </section>
@@ -74,7 +82,7 @@
                   <p class="shop_delivery_msg">
                     <span>¥{{shop.float_minimum_order_amount}}起送</span>
                     <span class="segmentation">/</span>
-                    <span>{{shop.piecewise_agent_fee.tips}}</span>
+                    <span v-show="shop.piecewise_agent_fee">{{shop.piecewise_agent_fee.tips}}</span>
                   </p>
                 </section>
               </div>
@@ -95,7 +103,13 @@ import { GET_ADDRESS, GET_CATEGORIES, GET_SHOPS } from "store/mutations_type";
 export default {
   name: "Msite",
   computed: {
-    ...mapState(["imgBaseUrl", "addressObj", "categories", "shops"]),
+    ...mapState([
+      "imgBaseUrl",
+      "addressObj",
+      "categories",
+      "shops",
+      "loginData"
+    ]),
     categoryArrs() {
       return this._.chunk(this.categories, 8);
     }

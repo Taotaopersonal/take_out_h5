@@ -33,6 +33,8 @@ Vue.component('ele-split', split)
 Vue.component('header-top', HeaderTop)
 //处理时间的过滤器
 import '@/filters'
+//处理表单的验证器
+import '@/validate'
 new Vue({
   render: h => h(App),
   router,

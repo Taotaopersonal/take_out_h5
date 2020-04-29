@@ -6,6 +6,7 @@ import Search from 'pages/route-search/search.vue'
 import Order from 'pages/route-order/order.vue'
 import Profile from 'pages/route-profile/profile.vue'
 import Login from 'pages/route-login/login.vue'
+import UserDetail from 'pages/route-user_detail/user_detail.vue'
 import Merchant from 'pages/route-merchant/merchant.vue'
 export default [{
     path: '/msite',
@@ -38,6 +39,13 @@ export default [{
   {
     path: '/login',
     component: Login,
+    meta: {
+      showFooter: false
+    }
+  },
+  {
+    path: '/userDetail',
+    component: UserDetail,
     meta: {
       showFooter: false
     }
