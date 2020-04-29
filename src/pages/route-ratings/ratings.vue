@@ -49,7 +49,7 @@
               </div>
               <p class="text">{{item.text}}</p>
               <div class="recommend">
-                <span :class="item.rateType===0?`icon-thumb_up`:`icon-thumb_down`"></span>
+                <span :class="item.rateType===0?`layout-thumb_up`:`layout-thumb_down`"></span>
               </div>
               <div class="time">{{item.rateTime | dateString}}</div>
             </div>
@@ -257,19 +257,19 @@ export default {
 
         .recommend {
           line-height: 16px;
-          font-size: 0;
+          font-size 12px
 
-          .icon-thumb_up, .icon-thumb_down, .item {
+          .layout-thumb_up, .layout-thumb_down, .item {
             display: inline-block;
             margin: 0 8px 4px 0;
             font-size: 9px;
           }
 
-          .icon-thumb_up {
-            color: $yellow;
+          .layout-thumb_up {
+            color: red;
           }
 
-          .icon-thumb_down {
+          .layout-thumb_down {
             color: rgb(147, 153, 159);
           }
 
