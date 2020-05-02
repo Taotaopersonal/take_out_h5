@@ -49,7 +49,7 @@
               </div>
               <p class="text">{{item.text}}</p>
               <div class="recommend">
-                <span :class="item.rateType===0?`layout-thumb_up`:`layout-thumb_down`"></span>
+                <span :class="rateType(item.rateType)"></span>
               </div>
               <div class="time">{{item.rateTime | dateString}}</div>
             </div>
@@ -62,7 +62,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { GET_RATINGS } from "store/mutations_type";
+import { GET_RATINGS } from "store/mutation_types";
 import Select from "components/ele-select/ele-select.vue";
 export default {
   name: "Ratings",
@@ -76,7 +76,11 @@ export default {
     "ele-select": Select
   },
   computed: {
-    ...mapState(["seller", "ratings"]),
+    // ...mapState(["seller", "ratings"]),
+    ...mapState({
+      seller: state => state.merchant.seller,
+      ratings: state => state.merchant.ratings
+    }),
     filterRatings() {
       return this.ratings.filter(item => {
         return (
@@ -84,6 +88,15 @@ export default {
           (!this.hasText || item.text.length > 0)
         );
       });
+    },
+    rateType() {
+      // 该参数是一个vm实例
+      // console.log(a,"aaaa");
+      return type => {
+        // 该参数是计算属性传递过来的参数
+        // console.log(type,"type");
+        return type === 0 ? `layout-thumb_up` : `layout-thumb_down`;
+      };
     }
   },
   methods: {
@@ -257,7 +270,7 @@ export default {
 
         .recommend {
           line-height: 16px;
-          font-size 12px
+          font-size: 12px;
 
           .layout-thumb_up, .layout-thumb_down, .item {
             display: inline-block;

@@ -105,7 +105,10 @@ import { mapState } from "vuex";
 export default {
   name: "Profile",
   computed: {
-    ...mapState(["loginData"])
+    // ...mapState(["loginData"])
+    ...mapState({
+      loginData: state => state.wrap.loginData
+    })
   },
   methods: {
     goto(path) {

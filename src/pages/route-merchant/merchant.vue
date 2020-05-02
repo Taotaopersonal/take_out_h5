@@ -22,8 +22,9 @@
 //引入icon图标组件库
 import "common/stylus/icon.styl";
 import Header from "components/ele-header/ele-header.vue";
-import { GET_SELLER } from "store/mutations_type";
 import { mapActions } from "vuex";
+import { GET_SELLER } from "store/mutation_types";
+import store from 'store'
 export default {
   name: "Merchant",
   props: {
@@ -37,6 +38,16 @@ export default {
   },
   async mounted() {
     await this[GET_SELLER](this.id);
+    console.log(this.id, "actions");
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (store.state.wrap.loginData._id) {
+      console.log(to.params.id);
+      this[GET_SELLER](to.params.id);
+      next();
+    } else {
+      next();
+    }
   }
 };
 </script>

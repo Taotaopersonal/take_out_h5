@@ -120,8 +120,8 @@
 
 <script>
 import { Toast } from "vant";
-import { mapActions, mapState } from "vuex";
-import { GET_LOGIN_INFO } from "store/mutations_type";
+import { mapState, mapActions } from "vuex";
+import { GET_LOGIN_INFO } from "store/mutation_types";
 const OK = 0;
 const ERROR = 1;
 export default {
@@ -143,7 +143,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(["staticImgBaseUrl", "loginData"]),
+    // ...mapState(["staticImgBaseUrl", "loginData"]),
+    ...mapState({
+      staticImgBaseUrl: state => state.wrap.staticImgBaseUrl,
+      loginData: state => state.wrap.loginData
+    }),
     phoneNumberIsRight() {
       let res = this.phoneReg.test(this.phoneNumber);
       return this.flag && res;

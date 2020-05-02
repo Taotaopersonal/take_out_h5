@@ -96,23 +96,51 @@
 
 <script>
 import Swiper from "swiper";
+// import { Toast } from "vant";
 import "swiper/css/swiper.min.css";
 import { mapActions, mapState } from "vuex";
-import { GET_ADDRESS, GET_CATEGORIES, GET_SHOPS } from "store/mutations_type";
+import { GET_ADDRESS, GET_CATEGORIES, GET_SHOPS } from "store/mutation_types";
 
 export default {
   name: "Msite",
   computed: {
-    ...mapState([
-      "imgBaseUrl",
-      "addressObj",
-      "categories",
-      "shops",
-      "loginData"
-    ]),
+    // ...mapState([
+    //   "imgBaseUrl",
+    //   "addressObj",
+    //   "categories",
+    //   "shops",
+    //   "loginData"
+    // ]),
+    ...mapState({
+      imgBaseUrl: state => state.wrap.imgBaseUrl,
+      addressObj: state => state.wrap.addressObj,
+      categories: state => state.wrap.categories,
+      shops: state => state.wrap.shops,
+      loginData: state => state.wrap.loginData
+    }),
     categoryArrs() {
       return this._.chunk(this.categories, 8);
     }
+  },
+  async mounted() {
+    // try {
+    await this[GET_ADDRESS]();
+    await this[GET_CATEGORIES]();
+    await this[GET_SHOPS]();
+
+    // 暂时不用这种方式处理切换到获取分类和商品的路由时未获得相关信息不进行跳转到登录页的问题
+    // } catch (error) {
+    // Toast.fail({
+    //   message: '登录超时，请重新登录',
+    //   duration: 2000,
+    //   onClose: () => {
+    //     this.$router.replace("/login");
+    //   }
+    // });
+    // }
+
+    this.renderSwiper();
+    this.initShopContainer();
   },
   methods: {
     ...mapActions([GET_ADDRESS, GET_CATEGORIES, GET_SHOPS]),
@@ -129,17 +157,13 @@ export default {
       });
     },
     initShopContainer() {
-      new this.BScroll(this.$refs.shopContainer, {
-        bounce: false
+      this.$nextTick(() => {
+        this.$refs.shopContainer &&
+          new this.BScroll(this.$refs.shopContainer, {
+            bounce: false
+          });
       });
     }
-  },
-  async mounted() {
-    await this[GET_ADDRESS]();
-    await this[GET_CATEGORIES]();
-    await this[GET_SHOPS]();
-    this.renderSwiper();
-    this.initShopContainer();
   }
 };
 </script>

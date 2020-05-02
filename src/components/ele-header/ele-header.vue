@@ -73,7 +73,10 @@ export default {
     "ele-list": List
   },
   computed: {
-    ...mapState(["seller"])
+    // ...mapState(["seller"])
+    ...mapState({
+      seller:state=>state.merchant.seller
+    })
   }
 };
 </script>

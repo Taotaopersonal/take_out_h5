@@ -8,11 +8,19 @@
 <script>
 // import Merchant from 'pages/route-merchant/merchant.vue'
 import FooterGuide from "components/FooterGuide/FooterGuide.vue";
+// import { mapActions } from "vuex";
+// import { AUTO_LOGIN } from "store/mutation_types";
 export default {
   name: "App",
   components: {
     FooterGuide
-  }
+  },
+  // methods: {
+  //   ...mapActions([AUTO_LOGIN])
+  // },
+  // created() {
+  //   this[AUTO_LOGIN]();
+  // }
 };
 </script>
 

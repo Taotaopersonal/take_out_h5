@@ -57,7 +57,10 @@ export default {
     "ele-contorl": Contorl
   },
   computed: {
-    ...mapState(["seller"]),
+    // ...mapState(["seller"]),
+    ...mapState({
+      seller: state => state.merchant.seller
+    }),
     totalCount() {
       return this.currentSelectItems.reduce((acc, cur) => {
         return acc + cur.count;

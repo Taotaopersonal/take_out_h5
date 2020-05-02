@@ -60,8 +60,8 @@
 
 
 <script>
-import { mapActions, mapState } from "vuex";
-import { GET_SELLER } from "store/mutations_type";
+import { mapState, mapActions } from "vuex";
+import { GET_SELLER } from "store/mutation_types";
 import List from "components/ele-list/ele-list.vue";
 export default {
   name: "Seller",
@@ -69,7 +69,10 @@ export default {
     "ele-list": List
   },
   computed: {
-    ...mapState(["seller"])
+    // ...mapState(["seller"])
+    ...mapState({
+      seller: state => state.merchant.seller
+    })
   },
   methods: {
     ...mapActions([GET_SELLER])

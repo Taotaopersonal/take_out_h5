@@ -9,7 +9,9 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    name:"Search"
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

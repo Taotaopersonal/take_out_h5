@@ -5,14 +5,15 @@ import {
 } from './toast'
 // http工具文件，该文件负责接受axios实例，和相关模块config信息，加工处理返回相应的请求方法组成的对象
 export default (axiosIns, config = {}) => {
+  let modelName = config.name || "default";
   //根据config中的api生成不同的请求方法返回，不同模块的请求配置api是不同的，所以返回的请求方法也不同
 
   //看门狗，当config中的api配置不规范时，他会咬住，不放行
   if (!config.api) {
-    throw new Error(`${config.name}配置文件中api选项是必须的`)
+    throw new Error(`${modelName}配置文件中api选项是必须的`)
   }
   if (Object.prototype.toString.call(config.api) !== '[object Object]')
-    throw new Error(`${config.name}配置文件中的api选项必须是一个object对象`)
+    throw new Error(`${modelName}配置文件中的api选项必须是一个object对象`)
 
   let httpObj = {}
   let api = config.api
@@ -25,18 +26,20 @@ export default (axiosIns, config = {}) => {
       data: apiData,
       $toast,
       hooks,
-      corsUrl
+      corsUrl,
+      token
     } = api[apiName]
 
-    httpObj[apiName] = async (data = {}) => {
+    apiData = apiData || {}
+    hooks = hooks || {}
 
-      apiData = apiData || {}
-      hooks = hooks || {}
-      let {
-        beforeReq,
-        afterReqSuccess,
-        afterReqFail
-      } = hooks;
+    let {
+      beforeReq,
+      afterReqSuccess,
+      afterReqFail
+    } = hooks;
+
+    httpObj[apiName] = async (data = {}) => {
 
       let transformData;
 
@@ -57,11 +60,25 @@ export default (axiosIns, config = {}) => {
       let result;
 
       //判断请求是否存在跨域请求,如果存在拼接对应交给devServer处理的跨域标识字段
-      if (corsUrl){
+      if (corsUrl) {
         url = corsUrl + url
         corsUrl = ''
       }
+      // 判断请求是否需要携带请求头参数
+      // let headers = {}
+      // if (Object.prototype.toString.call(token) === '[object Function]') {
+      //   headers = {
+      //     authorization: token() || ''
+      //   }
+      // }
+
+      let headers = {};
+      let Authorization = (typeof token === "function")&&token()
+      if(Authorization){
+          headers = {Authorization}
+      }
       
+
       try {
         $toast && loading()
         beforeReq && Object.prototype.toString.call(beforeReq) === '[object Function]' && beforeReq.call(config)
@@ -71,7 +88,8 @@ export default (axiosIns, config = {}) => {
             result = await axiosIns({
               method,
               url,
-              params: transformData
+              params: transformData,
+              headers
             })
             break;
           case "put":
@@ -79,7 +97,8 @@ export default (axiosIns, config = {}) => {
             result = await axiosIns({
               method,
               url,
-              data: transformData
+              data: transformData,
+              headers
             })
             break;
         }
@@ -89,6 +108,7 @@ export default (axiosIns, config = {}) => {
       } catch (error) {
         $toast && fail(error.message)
         afterReqFail && Object.prototype.toString.call(afterReqFail) === '[object Function]' && afterReqFail.call(config)
+        return Promise.reject(error)
       }
 
       return result;

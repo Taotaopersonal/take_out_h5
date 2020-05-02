@@ -28,7 +28,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { GET_GOODS } from "store/mutations_type";
+import { GET_GOODS } from "store/mutation_types";
 import GoodItem from "components/ele-goods_goodItem/ele-goods_goodItem.vue";
 import GoodCart from "components/ele-goods_goodCart/ele-goods_goodCart.vue";
 export default {
@@ -59,12 +59,14 @@ export default {
     },
     initTypeScroll() {
       this.typeBS = new this.BScroll(this.$refs.typeWrap, {
-        bounce: false
+        bounce: false,
+        click:true
       });
     },
     initFoodScroll() {
       this.foodBS = new this.BScroll(this.$refs.foodWrap, {
         bounce: false,
+        click:true,
         probeType: 3
       });
       this.foodBS.on("scroll", this.onScroll);
@@ -116,7 +118,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(["goods"]),
+    // ...mapState(["goods"]),
+    ...mapState({
+      goods: state => state.merchant.goods
+    }),
     currentSelectItems() {
       let currentSelectItems = [];
       this.goods.forEach(good => {
