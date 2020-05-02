@@ -23,7 +23,7 @@ Router.prototype.replace = function replace(location, onResolve, onReject) {
 
 
 let router = new Router({
-  // mode: "history",
+  mode: "history",
   routes,
   linkActiveClass: "active"
 })

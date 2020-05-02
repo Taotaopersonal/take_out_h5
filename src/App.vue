@@ -14,7 +14,7 @@ export default {
   name: "App",
   components: {
     FooterGuide
-  },
+  }
   // methods: {
   //   ...mapActions([AUTO_LOGIN])
   // },

@@ -21,6 +21,7 @@ function LoginSuccess(commit, data, loginWay, tapChangeImg) {
   local.set("token", data.token)
 
   if (loginWay === "password") tapChangeImg()
+
   Toast.success({
     message: "登录成功",
     duration: 2000

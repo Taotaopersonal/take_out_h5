@@ -210,6 +210,7 @@ export default {
       }
     },
     tapChangeImg() {
+      console.log(this.$refs.captcha.src);
       this.$refs.captcha.src = `${
         this.staticImgBaseUrl
       }/captcha?time=${Date.now()}`;

@@ -112,7 +112,9 @@ export default {
     await this[GET_RATINGS]();
     this.$nextTick(() => {
       new this.BScroll(this.$refs.ratings, {
-        bounce: false
+        bounce: false,
+        click:true,
+        tap:true
       });
     });
   }

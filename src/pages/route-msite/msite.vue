@@ -160,7 +160,8 @@ export default {
       this.$nextTick(() => {
         this.$refs.shopContainer &&
           new this.BScroll(this.$refs.shopContainer, {
-            bounce: false
+            bounce: false,
+            click:true
           });
       });
     }

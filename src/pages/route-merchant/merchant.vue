@@ -12,9 +12,7 @@
         <router-link :to="`/merchant/${id}/api/seller`">商家</router-link>
       </div>
     </div>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -24,7 +22,7 @@ import "common/stylus/icon.styl";
 import Header from "components/ele-header/ele-header.vue";
 import { mapActions } from "vuex";
 import { GET_SELLER } from "store/mutation_types";
-import store from 'store'
+import store from "store";
 export default {
   name: "Merchant",
   props: {

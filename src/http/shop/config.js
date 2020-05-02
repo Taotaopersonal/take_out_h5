@@ -5,17 +5,17 @@ export default {
     getSeller: {
       url: "/api/seller",
       method: "get",
-      $toast: true
+      // $toast: true
     },
     getGoods: {
       url: "/api/goods",
       method: "get",
-      $toast: true
+      // $toast: true
     },
     getRatings: {
       url: "/api/ratings",
       method: "get",
-      $toast: true
+      // $toast: true
     }
   }
 }
